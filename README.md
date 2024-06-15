@@ -12,7 +12,7 @@ This project is a COVID-19 tracking web application built with Angular and Prime
 - Interactive graph to visualize data trends.
 - Filtering options to view data by state.
 - Responsive design for optimal viewing on various devices.
-- 
+  
 ![image](https://github.com/k-v-n-p/covid-tracker-ui/assets/54201355/a5a36577-52ad-45c4-87a6-a4c962dcd01d)
 
 ## Installation
