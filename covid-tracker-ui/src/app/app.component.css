@@ -1,0 +1,105 @@
+#heading {
+   font-size:50px;
+   margin-top: 100px;
+   margin-left: 50px;
+}
+
+@media (max-width: 768px) {
+    mat-sidenav {
+      width: 100%;  /* full width on smaller screens */
+      position: fixed;
+    }
+  
+    .container main {
+      margin-left: 0;  /* no margin as sidenav is overlay type */
+    }
+  
+    mat-sidenav.mode {
+      mode: 'over';  /* changes mode to overlay on smaller screens */
+    }
+  }
+
+  .sidenav-container {
+    height: 100%;
+  }
+  
+  .sidenav {
+    width: 250px;
+    transition: width 0.3s ease;
+  }
+  .container{
+    height: 100%;
+  }
+  .sidenav-handle {
+    width: 20px;
+    height: 100%;
+    background-color: #ddd; /* Light grey background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  mat-sidenav.closed {
+    width: 20px; /* Width of the handle */
+  }
+  
+  main {
+    flex: 1;
+    padding-left: 20px; /* Ensure padding to prevent overlap by the handle */
+  }
+  
+  .menu-title {
+    padding: 16px 16px 8px 16px; /* Top, Right, Bottom, Left Padding */
+    font-size: 16px; /* Adjust font size as needed */
+    font-weight: bold; /* Makes the text bold */
+    color: #424242; /* A darker shade for better readability */
+    border-bottom: 1px solid #e0e0e0; /* Adds a subtle line below the title for separation */
+    background-color: #f5f5f5; /* Slightly different background to stand out */
+    text-align: left; /* Center the title text */
+  }
+  
+  .active {
+    color: #1976d2;  /* blue color for active state */
+    background: #e3f2fd;  /* light blue background for active state */
+  }
+  
+  .nav-text {
+    display: inline-block; /* Treats the text as an inline block */
+    vertical-align: middle; 
+    margin-left: 15px;  /* spacing between icon and text */
+    
+  }
+  
+  mat-icon {
+    color: inherit;  /* ensures icons inherit color from parent */
+    vertical-align: middle; 
+  }
+
+
+  a {
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  a:hover {
+    background-color: #eceff1;  /* light grey background on hover */
+  }
+  
+  mat-sidenav {
+    width: 250px;  /* fixed width for the sidenav */
+    box-shadow: 3px 0 6px rgba(0,0,0,0.24);  /* shadow for some depth */
+  }
+  
+  main {
+    flex: 1;
+    padding: 20px;
+    background: #fff;  /* light background for the content area */
+    overflow-y: auto;  /* allows scrolling */
+  }
+  
+  footer {
+    padding: 10px;
+    text-align: center;
+    background: #f8f9fa;
+  }
+  

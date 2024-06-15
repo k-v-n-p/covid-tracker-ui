@@ -1,0 +1,8 @@
+<p-card header={{selectedOption.title}} [style]="{'background-color': '#fafafa'}">
+  <!-- <i class={{stateData[0].increaseDecreaseIcon}}style="font-size: 2rem"></i> -->
+  <div style="margin-bottom: 10px;">
+    <p-dropdown [options]="dropdownOptions" [(ngModel)]="selectedOption" optionLabel="label" (onChange)="onDropdownChange()"></p-dropdown>
+  </div>
+  
+  <p-chart type="line" [data]="data" [options]="options" />
+</p-card>

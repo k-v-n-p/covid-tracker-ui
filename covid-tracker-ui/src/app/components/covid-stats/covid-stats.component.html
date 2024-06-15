@@ -1,0 +1,69 @@
+<div class="state-filter">
+  <p-card header="Choose your state" [style]="{'background-color': '#fafafa'}" class="dropdown">
+    <p-dropdown [options]="dropdownOptions" 
+      [placeholder]="selectedOption ? selectedOption.state : 'Select a state'" 
+      [(ngModel)]="selectedOption" optionLabel="state" 
+      (onChange)="onDropdownChange()"  [filter]="true" filterBy="state" 
+      [showClear]="true" >
+    </p-dropdown>
+  </p-card>   
+</div>
+<div class="grid main-container">
+  <div class="col-4">
+    <div *ngIf="loading" >
+      <p-progressSpinner styleClass="w-4rem h-4rem" 
+      strokeWidth="8" 
+      fill="var(--surface-ground)" 
+      animationDuration=".5s" />
+    </div>
+    <ng-container *ngIf="!loading">
+      <app-stat-graph [stateData]="stateData" [loading]="loading" key="deathIncrease"/>
+    </ng-container>
+  </div>
+  <div class="col-8">
+    <p-card header="{{selectedOption?.state}} COVID Statistics" [style]="{'background-color': '#fafafa'}">
+      <div class="grid summary">
+        <div class="col-6" >
+          <div *ngIf="stateData[0]?.deathConfirmed">
+            Total Confirmed Deaths: {{ stateData[0]?.deathConfirmed }}
+          </div>
+        </div>
+        <div class="col-6">
+          Current Positive Cases: {{stateData[0]?.positive}}
+        </div>
+      </div>
+      <div *ngIf="loading" >
+        <p-progressSpinner styleClass="w-4rem h-4rem" 
+      strokeWidth="8" 
+      fill="var(--surface-ground)" 
+      animationDuration=".5s" />
+      </div>
+      <ng-container *ngIf="!loading">
+        <p-table [value]="stateData" [paginator]="true" [rows]="7">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Date</th>
+              <th>New Cases</th>
+              <th>Rise in Deaths</th>
+              <th *ngIf="stateData[0]?.inIcuCurrently; else hospitalizedHeader">ICU Cases</th>
+              <ng-template #hospitalizedHeader><th>Hospitalized</th></ng-template>
+              <!-- <th>Rise/Fall</th> -->
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-day>
+            <tr>
+              <td>{{ day.dateChecked | date: 'shortDate' }}</td>
+              <td>{{ day.positiveIncrease }}</td>
+              <td>{{ day.deathIncrease >= 0 ? day.deathIncrease : 0 }}</td>
+              <td *ngIf="stateData[0]?.inIcuCurrently; else hospitalizedHeader">{{day.inIcuCurrently}}</td>
+              <ng-template #hospitalizedHeader><td>{{day.hospitalizedCurrently}}</td></ng-template>
+              <!-- <td>
+                <i [ngClass]="day.increaseDecreaseIcon"></i>
+              </td> -->
+            </tr>
+          </ng-template>
+        </p-table>
+      </ng-container>
+    </p-card>
+  </div>
+</div>
