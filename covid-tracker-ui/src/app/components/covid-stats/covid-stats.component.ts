@@ -17,7 +17,7 @@ export class CovidStatsComponent implements OnInit {
   loading: boolean = true;
   data: any;
   options: any;
-  selectedOption:Option; 
+  selectedOption:Option={state: "Arizona", key:"az"};//default option 
   dropdownOptions: Option[] = [];
 
 
@@ -25,7 +25,7 @@ export class CovidStatsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadStateInfo();
-    this.loadStateData('az');
+    this.loadStateData(this.selectedOption.key);
   }
 
   loadStateInfo(){
@@ -35,8 +35,6 @@ export class CovidStatsComponent implements OnInit {
         data.map((info, index) => 
           this.dropdownOptions.push({state:info.name, key:info.state})
         );
-        if (data) {this.loading=false;}
-        console.log(this.dropdownOptions);
       },
       error => {
         console.error('Error fetching states information: ', error);
@@ -61,17 +59,18 @@ export class CovidStatsComponent implements OnInit {
     );
   }
 
-  calculateIncreaseDecreaseIcon(index: number, data: any[]): string {
+  calculateIncreaseDecreaseIcon(index: number, data: any[]): string { 
+    //icon to determine rise or fall, but made no sense as it is is almost always rising
     if (index === 0) {
-      return ''; // No previous day to compare with for the first day
+      return ''; 
     }
     const positiveIncreaseCases = data[index].positiveIncrease;
     if (positiveIncreaseCases > 0) {
-      return 'pi pi-arrow-up'; // Rise compared to previous day
+      return 'pi pi-arrow-up'; 
     } else if (positiveIncreaseCases < 0) {
-      return 'pi pi-arrow-down'; // Fall compared to previous day
+      return 'pi pi-arrow-down'; 
     } else {
-      return ''; // No change compared to previous day
+      return ''; 
     }
   }
   onDropdownChange() {
